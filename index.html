@@ -50,15 +50,23 @@
       margin-top: 20px;
       font-size: 20px;
     }
+
+    #gif {
+      display: none;
+      margin-top: 20px;
+      width: 300px;
+      height: auto;
+    }
   </style>
 </head>
 <body>
-  <h1 id="question">1. Provi desiderio sessuale?</h1>
+  <h1 id="question">1. Are you interested in sexual activity?</h1>
   
-  <button onclick="answer('yes')">Si</button>
+  <button onclick="answer('yes')">Sí</button>
   <button onclick="answer('no')">No</button>
   
   <div class="result" id="result"></div>
+  <img id="gif" src="" alt="response gif">
 
   <script>
     let answers = [];
@@ -69,7 +77,7 @@
       questionCount++;
 
       if (questionCount === 1) {
-        document.getElementById('question').innerText = "2. desideri il sesso?";
+        document.getElementById('question').innerText = "2. Are you interested in sexual activity?";
       } else if (questionCount === 2) {
         determineResult();
       }
@@ -77,16 +85,27 @@
 
     function determineResult() {
       let result;
-      
+      let gifUrl = ''; // URL della GIF
+
       if (answers[0] === 'yes' && answers[1] === 'no') {
-        result = "sei gay.";
+        result = "Sei gay.";
+        gifUrl = 'https://media1.tenor.com/m/aQV2bxuamhoAAAAd/bocchino-pompino.gif'; // Inserisci qui la URL della GIF per "sei gay"
       } else if (answers[0] === answers[1]) {
-        result = "non sei allosessuale.";
+        result = "Non sei allosessuale.";
       } else {
-        result = "sei allosessuale.";
+        result = "Sei allosessuale.";
+        gifUrl = 'URL_DELLA_GIF_DEL_MARZONE'; // Inserisci qui la URL della GIF per "sei allosessuale"
       }
 
       document.getElementById('result').innerText = result;
+
+      // Mostra la GIF solo se c'è una URL disponibile
+      if (gifUrl) {
+        const gifElement = document.getElementById('gif');
+        gifElement.src = gifUrl;
+        gifElement.style.display = 'block';
+      }
+
       document.querySelectorAll('button').forEach(button => button.disabled = true);
     }
   </script>
